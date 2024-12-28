@@ -1,0 +1,45 @@
+[General]
+bypass-system = true
+ipv6 = false
+prefer-ipv6 = false
+private-ip-answer = true
+dns-direct-system = false
+dns-fallback-system = false
+dns-direct-fallback-proxy = true
+dns-server = https://dns.adguard-dns.com/dns-query, tls://dns.adguard-dns.com, quic://dns.adguard-dns.com
+fallback-dns-server = https://8.8.8.8/dns-query,https://1.1.1.1/dns-query
+hijack-dns = :53
+skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,captive.apple.com
+tun-excluded-routes = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32,239.255.255.250/32
+tun-included-routes = 
+always-real-ip=time.*.com,ntp.*.com,*.cloudflareclient.com,localhost.sec.qq.com,localhost.ptlogin2.qq.com,localhost.work.weixin.qq.com
+icmp-auto-reply = true
+always-reject-url-rewrite = false
+udp-policy-not-supported-behaviour = REJECT
+include =
+update-url = https://cdn.jsdelivr.net/gh/misha-tgshv/shadowrocket-configuration-file@release/conf/sr_ru_public_lists.conf
+
+[Proxy Group]
+AUTO = url-test,interval=600,timeout=5,url=https://cp.cloudflare.com/generate_204,policy-regex-filter=*
+
+[Rule]
+# Список доменов автора
+RULE-SET,https://raw.githubusercontent.com/misha-tgshv/shadowrocket-configuration-file/release/rules/domain_custom.list,PROXY
+# Список доменов Youtube
+RULE-SET,https://raw.githubusercontent.com/misha-tgshv/shadowrocket-configuration-file/release/rules/domain_youtube.list,PROXY
+# Список доменов Discord
+RULE-SET,https://raw.githubusercontent.com/misha-tgshv/shadowrocket-configuration-file/release/rules/domain_discord.list,PROXY
+# Список доменов antifilter
+RULE-SET,https://raw.githubusercontent.com/misha-tgshv/shadowrocket-configuration-file/release/rules/domain_antifilter.list,PROXY
+# Список ip-адресов antifilter
+RULE-SET,https://raw.githubusercontent.com/misha-tgshv/shadowrocket-configuration-file/release/rules/geoip_antifilter.list,PROXY,no-resolve
+
+# Список доменов Instagram
+DOMAIN-SUFFIX,instagram.com,PROXY
+DOMAIN-SUFFIX,cdninstagram.com,PROXY
+
+# Финальное правило маршрутизации
+FINAL,DIRECT
+```
+
+Теперь этот файл включает правила, которые направляют трафик Instagram через прокси-сервер. Если нужно добавить больше специфичных доменов, связанных с Instagram, их можно добавить аналогичным образом.
